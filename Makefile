@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: otawatanabe <otawatanabe@student.42.fr>    +#+  +:+       +#+         #
+#    By: owatanab <owatanab@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/03 19:01:00 by otawatanabe       #+#    #+#              #
-#    Updated: 2024/09/06 15:07:09 by otawatanabe      ###   ########.fr        #
+#    Updated: 2024/09/06 16:49:17 by owatanab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,14 +20,12 @@ all: $(NAME)
 
 bonus: $(NAME)
 
-$(NAME): $(OBJS) $(LIB)
+$(NAME): $(OBJS)
+	make -C libft
 	$(CC) $(CFLAGS) $^ $(LIB) -o $@
 
 %.o: %.c
 	cc $(CFLAGS) -c $< -o $@
-
-$(LIB):
-	make -C libft
 
 clean:
 	make clean -C libft
