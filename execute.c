@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otawatanabe <otawatanabe@student.42.fr>    +#+  +:+       +#+        */
+/*   By: owatanab <owatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:48:04 by otawatanabe       #+#    #+#             */
-/*   Updated: 2024/09/12 16:39:53 by otawatanabe      ###   ########.fr       */
+/*   Updated: 2024/09/12 19:16:25 by owatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	middle_execve(int in_fd, t_pipex *pipex, int n)
 		error_exit("fork", pipex);
 	if (p != 0)
 	{
+		close(in_fd);
 		close(pipe_fd[1]);
 		return (pipe_fd[0]);
 	}
