@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: owatanab <owatanab@student.42.fr>          +#+  +:+       +#+         #
+#    By: otawatanabe <otawatanabe@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/03 19:01:00 by otawatanabe       #+#    #+#              #
-#    Updated: 2024/09/06 16:49:17 by owatanab         ###   ########.fr        #
+#    Updated: 2024/09/11 19:46:54 by otawatanabe      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

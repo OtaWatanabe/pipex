@@ -5,3 +5,4 @@ q
 *.o
 pipex
 *.a
+test1.c

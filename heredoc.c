@@ -6,7 +6,7 @@
 /*   By: otawatanabe <otawatanabe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 11:20:12 by otawatanabe       #+#    #+#             */
-/*   Updated: 2024/09/06 15:11:29 by otawatanabe      ###   ########.fr       */
+/*   Updated: 2024/09/12 17:24:26 by otawatanabe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ char	*get_random(int n)
 	char	*ret;
 	int		i;
 
-	ret = ft_calloc(n + 9, 1);
+	ret = ft_calloc(n + 14, 1);
 	if (ret == NULL)
 		return (NULL);
 	i = 0;
-	while (i < 7)
+	while (i < 12)
 	{
-		ret[i] = "tmpfile"[i];
+		ret[i] = "/tmp/tmpfile"[i];
 		++i;
 	}
-	while (i - 7 < n)
+	while (i - 12 < n)
 	{
 		ret[i] = '+';
 		++i;
@@ -66,10 +66,7 @@ void	read_doc(int fd, t_pipex *pipex)
 
 	line = get_next_line(0);
 	if (line == NULL)
-	{
-		ft_putstr_fd("read error\n", 2);
-		exit(0);
-	}
+		error_exit("read", pipex);
 	while (ft_strncmp(line, pipex->limiter, ft_strlen(pipex->limiter)) != 0
 		|| line[ft_strlen(pipex->limiter)] != '\n')
 	{
@@ -78,53 +75,52 @@ void	read_doc(int fd, t_pipex *pipex)
 		line = get_next_line(0);
 		if (line == NULL)
 		{
-			ft_putstr_fd("read error\n", 2);
 			close(fd);
-			exit(0);
+			error_exit("read", pipex);
 		}
 	}
 	free(line);
 }
 
-int	*pipe_doc(int fd, t_pipex *pipex, char *tmp)
-{
-	int	*pipe_fd;
+// int	*pipe_doc(int fd, t_pipex *pipex, char *tmp)
+// {
+// 	int	*pipe_fd;
 
-	pipe_fd = set_pipe(pipex);
-	if (dup2(fd, 0) == -1)
-	{
-		ft_putstr_fd("dup2 error\n", 2);
-		exit(0);
-	}
-	access_execve(pipex, 0);
-	close(pipe_fd[1]);
-	close(fd);
-	unlink(tmp);
-	free(tmp);
-	return (pipe_fd);
-}
+// 	pipe_fd = set_pipe(pipex);
+// 	if (dup2(fd, 0) == -1)
+// 		error_exit("dup2", pipex);
+// 	access_execve(pipex, 0);
+// 	close(pipe_fd[1]);
+// 	close(fd);
+// 	unlink(tmp);
+// 	free(tmp);
+// 	return (pipe_fd);
+// }
 
-int	*here_doc(t_pipex *pipex)
+int	here_doc(t_pipex *pipex)
 {
 	int		fd;
-	char	*tmp;
+	int		pipe_fd[2];
+	pid_t	p;
 
-	tmp = get_filename();
-	if (tmp == NULL)
+	pipex->tmp = get_filename();
+	if (pipex->tmp == NULL)
 		exit(0);
-	fd = open(tmp, O_WRONLY | O_CREAT, 0777);
+	fd = open(pipex->tmp, O_WRONLY | O_CREAT, 0777);
 	if (fd == -1)
-	{
-		ft_putstr_fd("open error\n", 2);
-		exit(0);
-	}
+		error_exit("open", pipex);
 	read_doc(fd, pipex);
 	close(fd);
-	fd = open(tmp, O_RDONLY);
-	if (fd == -1)
+	if (pipe(pipe_fd) == -1)
+		error_exit("pipe", pipex);
+	p = fork();
+	if (p == 0)
 	{
-		ft_putstr_fd("open error\n", 2);
-		exit(0);
+		fd = open(pipex->tmp, O_RDONLY);
+		if (fd == -1)
+			error_exit("open", pipex);
+		pipe_execve(pipex, pipe_fd, fd, 0);
 	}
-	return (pipe_doc(fd, pipex, tmp));
+	close(pipe_fd[1]);
+	return (pipe_fd[0]);
 }
