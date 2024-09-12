@@ -6,7 +6,7 @@
 /*   By: otawatanabe <otawatanabe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 11:20:12 by otawatanabe       #+#    #+#             */
-/*   Updated: 2024/09/12 17:24:26 by otawatanabe      ###   ########.fr       */
+/*   Updated: 2024/09/12 17:33:52 by otawatanabe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,21 +81,6 @@ void	read_doc(int fd, t_pipex *pipex)
 	}
 	free(line);
 }
-
-// int	*pipe_doc(int fd, t_pipex *pipex, char *tmp)
-// {
-// 	int	*pipe_fd;
-
-// 	pipe_fd = set_pipe(pipex);
-// 	if (dup2(fd, 0) == -1)
-// 		error_exit("dup2", pipex);
-// 	access_execve(pipex, 0);
-// 	close(pipe_fd[1]);
-// 	close(fd);
-// 	unlink(tmp);
-// 	free(tmp);
-// 	return (pipe_fd);
-// }
 
 int	here_doc(t_pipex *pipex)
 {

@@ -6,7 +6,7 @@
 /*   By: otawatanabe <otawatanabe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 10:21:58 by otawatanabe       #+#    #+#             */
-/*   Updated: 2024/09/12 17:27:56 by otawatanabe      ###   ########.fr       */
+/*   Updated: 2024/09/12 17:34:03 by otawatanabe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,25 +69,6 @@ void	set_commands(t_pipex *pipex, char *argv[])
 			error_exit("malloc", pipex);
 	}
 }
-
-// void	set_paths(t_pipex *pipex)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	pipex->command_path = ft_calloc(sizeof(char *) * pipex->command_num, 1);
-// 	pipex->error = ft_calloc(sizeof(char *) * pipex->command_num, 1);
-// 	if (pipex->command_path == NULL || pipex->error == NULL)
-// 		error_exit("malloc", pipex);
-// 	while (i < pipex->command_num)
-// 	{
-// 		pipex->error[i] = command_path(pipex, i);
-// 		if (pipex->error[i] == NULL)
-// 			error_exit("malloc", pipex);
-// 		printf("%s: %d\n", pipex->error[i], i);
-// 		++i;
-// 	}
-// }
 
 int	main(int argc, char *argv[], char *env[])
 {

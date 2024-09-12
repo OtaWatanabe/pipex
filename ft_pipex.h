@@ -6,7 +6,7 @@
 /*   By: otawatanabe <otawatanabe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 23:08:54 by otawatanabe       #+#    #+#             */
-/*   Updated: 2024/09/12 16:35:33 by otawatanabe      ###   ########.fr       */
+/*   Updated: 2024/09/12 17:33:03 by otawatanabe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,9 @@ typedef struct s_pipex
 
 void	execute(t_pipex *pipex);
 int		initial_execve(t_pipex *pipex);
-int		*set_pipe(t_pipex *pipex);
-void	access_execve(t_pipex *pipex, int n, int *fd);
 int		r_access_open(t_pipex *pipex);
 void	existence_error(char *path);
 void	permission_error(char *path);
-void	fork_execve(t_pipex *pipex, char *path, int n, int *fd);
 int		w_access_open(t_pipex *pipex);
 void	command_error(char *command);
 int		here_doc(t_pipex *pipex);

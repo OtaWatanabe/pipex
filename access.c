@@ -6,7 +6,7 @@
 /*   By: otawatanabe <otawatanabe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:44:18 by otawatanabe       #+#    #+#             */
-/*   Updated: 2024/09/12 17:16:27 by otawatanabe      ###   ########.fr       */
+/*   Updated: 2024/09/12 17:33:20 by otawatanabe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,49 +67,6 @@ char	*concat_path(char *path, char *file, t_pipex *pipex)
 	ft_strlcat(concat, file, path_len + file_len + 2);
 	return (concat);
 }
-
-// int	command_execve(t_pipex *pipex, int n, int in_fd, int out_fd)
-// {
-// 	int		i;
-// 	char	*path;
-
-// 	i = 0;
-// 	while (pipex->env_path[i])
-// 	{
-// 		path = concat_path(pipex->env_path[i], pipex->command[n][0], pipex);
-// 		if (access(path, F_OK) != -1)
-// 		{
-// 			if (access(path, X_OK) == -1)
-// 				permission_error(path);
-// 			else if (fork_execve(path, 
-// pipex->command[n][0], in_fd, out_fd) == -1)
-// 				exit(0);
-// 			free(path);
-// 			return ;
-// 		}
-// 		free(path);
-// 		++i;
-// 	}
-// 	command_error(pipex->command[n][0]);
-// }
-
-// void	access_execve(t_pipex *pipex, int n, int in_fd, int out_fd)
-// {
-// 	if (pipex->command[n][0][0] == '\0')
-// 		command_error("");
-// 	else if (ft_strchr(pipex->command[n][0], '/') == NULL)
-// 		command_execve(pipex, n, in_fd, out_fd);
-// 	else if (access(pipex->command[n][0], F_OK) == -1)
-// 		existence_error(pipex->command[n][0]);
-// 	else if (access(pipex->command[n][0], X_OK) == -1)
-// 		permission_error(pipex->command[n][0]);
-// 	else
-// 	{
-// 		if (fork_execve(pipex-
-// >command[n][0], pipex->command[n], in_fd, out_fd) == -1)
-// 			exit(0);
-// 	}
-// }
 
 char	*add_env(t_pipex *pipex, int n)
 {
